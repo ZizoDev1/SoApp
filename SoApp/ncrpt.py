@@ -16,9 +16,3 @@ def decrypt(string):
         T, "t").replace(U, "u").replace(V, "v").replace(W, "w").replace(X, "x").replace(Y, "y").replace(Z, "z").replace(
         space, " ")
     return string
-
-nan = "hello"
-
-nan = encrypt(nan)
-
-print(nan)
