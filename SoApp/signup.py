@@ -1,7 +1,6 @@
 from ncrpt import *
 from getpass import getpass
 from hashing import *
-import sqlite3
 
 
 fullName = ""
@@ -23,13 +22,25 @@ def signup():
     while True:
         fullName = input("Enter your full name \n --> ")
         if " " in fullName:
-            firstName, lastName = fullName.split(" ", 1)
-            break
+            # Check if first name true
+            if fullName[0] == " ":
+                print("You didn't your first name")
+            else:
+                firstName, lastName = fullName.split(" ", 1)
+                break
+
         else:
             print("Please enter your full name with a space between first and last names.")
 
     userName = input("Enter your username \n --> ")
-    userEmail = input("Enter your email address \n --> ")
+
+    while True:
+        userEmail = input("Enter your email address \n --> ")
+        if "@" in userEmail and ".com" in userEmail:
+            print(" ")
+
+
+
     password = getpass("Enter your password \n --> ")
     rePassword = getpass("Re-enter your password \n -->")
 
@@ -40,22 +51,25 @@ def signup():
         password = getpass("Enter your password \n --> ")
         rePassword = getpass("Re-enter your password \n -->")
 
+
 signup()
 
-encrypt(fullName)
-encrypt(firstName)
-encrypt(lastName)
-user_name = encrypt(userName)
-email = encrypt(userEmail)
-pass_word = encrypt(password)
+
+fullName = encrypt(fullName)
+firstName = encrypt(firstName)
+lastName = encrypt(lastName)
+userName = encrypt(userName)
+userEmail = encrypt(userEmail)
+password = encrypt(password)
 
 try:
     # Call the hashing function and store the hashed password
-    PassWord = HashingInfo(pass_word)
-    Email = HashingInfo(email)
-    UserName = HashingInfo(user_name)
+    password = HashingInfo(password)
+    Email = HashingInfo(userEmail)
+    UserName = HashingInfo(userName)
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")
 
 
+print(password)
