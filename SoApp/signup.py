@@ -43,10 +43,12 @@ def signup():
 
 signup()
 
-fullName = encrypt(fullName)
-firstName = encrypt(firstName)
-lastName = encrypt(lastName)
-userName = encrypt(userName)
-userEmail = encrypt(userEmail)
-password = encrypt(password)
 
+encrypt(fullName)
+encrypt(firstName)
+encrypt(lastName)
+encrypt(userName)
+encrypt(userEmail)
+encrypt(password)
+
+print(fullName)
