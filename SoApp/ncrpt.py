@@ -22,9 +22,9 @@ def decrypt(string):
 
 # en = encrypt
 """
-en_first_name = def(first_name)
-en_last_name = def(last_name)
-en_pass_word = def(pass_word)
-en_email = def(email)
-en_username = def(user_name)
+en_first_name = encrypt(first_name)
+en_last_name = encrypt(last_name)
+en_pass_word = encrypt(pass_word)
+en_email = encrypt(email)
+en_username = encrypt(user_name)
 """
