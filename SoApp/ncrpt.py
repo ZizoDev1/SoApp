@@ -1,4 +1,5 @@
 from dictionary import *
+from signup import *
 def encrypt(string):
     string = string.lower()
     userPassword = string.translate(
@@ -17,4 +18,13 @@ def decrypt(string):
         T, "t").replace(U, "u").replace(V, "v").replace(W, "w").replace(X, "x").replace(Y, "y").replace(Z, "z").replace(
         space, " ")
 
-    print(userPassword)
+
+
+# en = encrypt
+"""
+en_first_name = def(first_name)
+en_last_name = def(last_name)
+en_pass_word = def(pass_word)
+en_email = def(email)
+en_username = def(user_name)
+"""
