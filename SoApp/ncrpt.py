@@ -7,6 +7,7 @@ def encrypt(string):
         str.maketrans({"a": A, "b": B, "c": C, "d": D, "e": E, "f": F, "g": G, "h": h, "i": i, "j": J, "k": K, "l": L,
                     "m": M, "n": N, "o": o, "p": P, "q": Q, "r": R, "s": S, "t": T, "u": U, "v": V, "w": W, "x": X,
                     "y": Y, "z": Z, " ": space}))
+    return string
 
 
 def decrypt(string):
@@ -15,3 +16,4 @@ def decrypt(string):
         M, "m").replace(N, "n").replace(o, "o").replace(P, "p").replace(Q, "q").replace(R, "r").replace(S, "s").replace(
         T, "t").replace(U, "u").replace(V, "v").replace(W, "w").replace(X, "x").replace(Y, "y").replace(Z, "z").replace(
         space, " ")
+    return string

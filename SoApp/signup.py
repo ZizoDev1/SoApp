@@ -1,5 +1,7 @@
 from ncrpt import *
 from getpass import getpass
+from hashing import *
+import sqlite3
 
 
 fullName = ""
@@ -38,16 +40,22 @@ def signup():
         password = getpass("Enter your password \n --> ")
         rePassword = getpass("Re-enter your password \n -->")
 
-    print("Thank you for signing up")
-
-
 signup()
-
 
 encrypt(fullName)
 encrypt(firstName)
 encrypt(lastName)
-encrypt(userName)
-encrypt(userEmail)
-encrypt(password)
+user_name = encrypt(userName)
+email = encrypt(userEmail)
+pass_word = encrypt(password)
+
+try:
+    # Call the hashing function and store the hashed password
+    PassWord = HashingInfo(pass_word)
+    Email = HashingInfo(email)
+    UserName = HashingInfo(user_name)
+    print(f"Successfully signed up")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
 
