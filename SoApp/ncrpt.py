@@ -8,10 +8,7 @@ def encrypt(string):
                     "m": M, "n": N, "o": o, "p": P, "q": Q, "r": R, "s": S, "t": T, "u": U, "v": V, "w": W, "x": X,
                     "y": Y, "z": Z, " ": space}))
     return string
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 
 def decrypt(string):
     string = string.replace(A, "a").replace(B, "b").replace(C, "c").replace(D, "d").replace(E, "e").replace(
@@ -19,8 +16,4 @@ def decrypt(string):
         M, "m").replace(N, "n").replace(o, "o").replace(P, "p").replace(Q, "q").replace(R, "r").replace(S, "s").replace(
         T, "t").replace(U, "u").replace(V, "v").replace(W, "w").replace(X, "x").replace(Y, "y").replace(Z, "z").replace(
         space, " ")
-<<<<<<< HEAD
     return string
-=======
-    return string
->>>>>>> main
