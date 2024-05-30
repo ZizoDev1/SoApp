@@ -4,6 +4,7 @@ from getpass import getpass
 
 fullName = ""
 firstName = ""
+userName = ""
 lastName = ""
 userEmail = ""
 password = ""
@@ -25,6 +26,7 @@ def signup():
         else:
             print("Please enter your full name with a space between first and last names.")
 
+    userName = input("Enter your username \n --> ")
     userEmail = input("Enter your email address \n --> ")
     password = getpass("Enter your password \n --> ")
     rePassword = getpass("Re-enter your password \n -->")
@@ -45,6 +47,7 @@ signup()
 encrypt(fullName)
 encrypt(firstName)
 encrypt(lastName)
+encrypt(userName)
 encrypt(userEmail)
 encrypt(password)
 
