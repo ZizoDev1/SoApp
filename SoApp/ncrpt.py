@@ -3,8 +3,9 @@ def encrypt(string):
     string = string.lower()
     userPassword = string.translate(
         str.maketrans({"a": A, "b": B, "c": C, "d": D, "e": E, "f": F, "g": G, "h": h, "i": i, "j": J, "k": K, "l": L,
-                       "m": M, "n": N, "o": o, "p": P, "q": Q, "r": R, "s": S, "t": T, "u": U, "v": V, "w": W, "x": X,
-                       "y": Y, "z": Z, " ": space}))
+                    "m": M, "n": N, "o": o, "p": P, "q": Q, "r": R, "s": S, "t": T, "u": U, "v": V, "w": W, "x": X,
+                    "y": Y, "z": Z, " ": space
+                    }))
     print(userPassword)
 
 
