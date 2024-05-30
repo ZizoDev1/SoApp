@@ -1,5 +1,6 @@
 from ncrpt import *
 from getpass import getpass
+from hashing import *
 
 
 fullName = ""
@@ -21,34 +22,62 @@ def signup():
     while True:
         fullName = input("Enter your full name \n --> ")
         if " " in fullName:
-            firstName, lastName = fullName.split(" ", 1)
-            break
+            # Check if first name true
+            if fullName[0] == " ":
+                print("You didn't your first name")
+            else:
+                firstName, lastName = fullName.split(" ", 1)
+                break
+
         else:
             print("Please enter your full name with a space between first and last names.")
 
-    userName = input("Enter your username \n --> ")
-    userEmail = input("Enter your email address \n --> ")
-    password = getpass("Enter your password \n --> ")
+    userName = input("Enter your username \n --> ").lower()
+
+    while True:
+        userEmail = input("Enter your email address \n --> ")
+        if "@" in userEmail and ".com" in userEmail:
+            break
+
+        else:
+            print("That's not a valid email address")
+            print("----------------------")
+
+    password = getpass("Enter your password \n requirements (8 characters, numbers, and special characters) \n --> ")
     rePassword = getpass("Re-enter your password \n -->")
 
 # check if passwords rematch
 
     while password != rePassword:
         print("Passwords do not match")
+<<<<<<< HEAD
         password = getpass("Enter your password \n --> ",)
+=======
+        print("----------------------")
+        password = getpass("Enter your password \n --> ")
+>>>>>>> main
         rePassword = getpass("Re-enter your password \n -->")
-
-    print("Thank you for signing up")
 
 
 signup()
 
 
-encrypt(fullName)
-encrypt(firstName)
-encrypt(lastName)
-encrypt(userName)
-encrypt(userEmail)
-encrypt(password)
+fullName = encrypt(fullName)
+firstName = encrypt(firstName)
+lastName = encrypt(lastName)
+userName = encrypt(userName)
+userEmail = encrypt(userEmail)
+password = encrypt(password)
 
+<<<<<<< HEAD
 print(fullName)
+=======
+try:
+    # Call the hashing function and store the hashed password
+    password = HashingInfo(password)
+    Email = HashingInfo(userEmail)
+    UserName = HashingInfo(userName)
+    print(f"Successfully signed up")
+except Exception as e:
+    print(f"An error occurred: {e}")
+>>>>>>> main
