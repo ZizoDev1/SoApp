@@ -18,14 +18,3 @@ def decrypt(string):
         space, " ")
 
     print(userPassword)
-
-
-userChoice = input("Do you want to encrypt or decrypt (e,d) \n --> ")
-userInput = input("Enter text you want to encrypt or decrypt \n --> ")
-
-if userChoice.lower() == "e":
-    encrypt(userInput)
-
-
-elif userChoice.lower() == "d":
-    decrypt(userInput)
