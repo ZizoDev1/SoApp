@@ -50,12 +50,9 @@ def signup():
 
     while password != rePassword:
         print("Passwords do not match")
-<<<<<<< HEAD
         password = getpass("Enter your password \n --> ",)
-=======
         print("----------------------")
         password = getpass("Enter your password \n --> ")
->>>>>>> main
         rePassword = getpass("Re-enter your password \n -->")
 
 
@@ -69,9 +66,7 @@ userName = encrypt(userName)
 userEmail = encrypt(userEmail)
 password = encrypt(password)
 
-<<<<<<< HEAD
 print(fullName)
-=======
 try:
     # Call the hashing function and store the hashed password
     password = HashingInfo(password)
@@ -80,4 +75,3 @@ try:
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")
->>>>>>> main
