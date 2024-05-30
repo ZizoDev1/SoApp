@@ -32,22 +32,25 @@ def signup():
         else:
             print("Please enter your full name with a space between first and last names.")
 
-    userName = input("Enter your username \n --> ")
+    userName = input("Enter your username \n --> ").lower()
 
     while True:
         userEmail = input("Enter your email address \n --> ")
         if "@" in userEmail and ".com" in userEmail:
-            print(" ")
+            break
 
+        else:
+            print("That's not a valid email address")
+            print("----------------------")
 
-
-    password = getpass("Enter your password \n --> ")
+    password = getpass("Enter your password \n requirements (8 characters, numbers, and special characters) \n --> ")
     rePassword = getpass("Re-enter your password \n -->")
 
 # check if passwords rematch
 
     while password != rePassword:
         print("Passwords do not match")
+        print("----------------------")
         password = getpass("Enter your password \n --> ")
         rePassword = getpass("Re-enter your password \n -->")
 
@@ -70,6 +73,3 @@ try:
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")
-
-
-print(password)
