@@ -35,7 +35,7 @@ def signup():
 
     while password != rePassword:
         print("Passwords do not match")
-        password = getpass("Enter your password \n --> ")
+        password = getpass("Enter your password \n --> ",)
         rePassword = getpass("Re-enter your password \n -->")
 
     print("Thank you for signing up")
@@ -43,11 +43,10 @@ def signup():
 
 signup()
 
-
-encrypt(fullName)
-encrypt(firstName)
-encrypt(lastName)
-encrypt(userName)
-encrypt(userEmail)
-encrypt(password)
+fullName = encrypt(fullName)
+firstName = encrypt(firstName)
+lastName = encrypt(lastName)
+userName = encrypt(userName)
+userEmail = encrypt(userEmail)
+password = encrypt(password)
 
