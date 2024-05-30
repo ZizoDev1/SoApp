@@ -82,6 +82,7 @@ try:
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")
+    # For begging if there is an error
     signup()
 
 
