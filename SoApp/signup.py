@@ -35,7 +35,7 @@ def signup():
 
     while True:
         userEmail = input("Enter your email address \n --> ")
-        if "@" in userEmail and ".com" in userEmail:
+        if "@" in userEmail:
             break
 
         else:
