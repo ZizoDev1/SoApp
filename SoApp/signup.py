@@ -28,9 +28,24 @@ rePassword = ""
 print("------------Sign up------------")
 print("  Please enter your information  ")
 
+def makelistofsignup_info():
+    cursor.execute("SELECT username, password, email FROM signup_info")
+    alli = cursor.fetchall()
+    linfo = []
+    fa = ""
+    for i in alli:
+        r = str(i[0])
+        l = str(i[1])
+        fa = r + " " + l
+        li = fa.split(" ")
+        linfo.append(li)
+    return linfo
+
+linfo = makelistofsignup_info()
+
 # Function to get user info to sign up with this info
 def signup():
-    global fullName, firstName, lastName, userEmail, password, rePassword
+    global fullName, firstName, lastName, userEmail, password, rePassword, userName
 
     # check if user entered full name
     while True:
@@ -46,13 +61,27 @@ def signup():
         else:
             print("Please enter your full name with a space between first and last names.")
 
-    userName = input("Enter your username \n --> ").lower()
+    while True:
+        userName = input("Enter your username \n --> ")
+        username = forget(userName)
+        for i in linfo:
+            if username == i[0]:
+                print("now, This username was used to")
+            else:
+                print("")
+                print(i[0], username)
+                print("")
+                break
 
     while True:
         userEmail = input("Enter your email address \n --> ")
         if "@" in userEmail:
-            break
-
+            Email = forget(userEmail)
+            for t in linfo :
+                if Email == i[3]:
+                    print("now, email address was used to")
+                else :
+                    break
         else:
             print("That's not a valid email address")
             print("----------------------")
@@ -85,19 +114,13 @@ signup()
 # encrption all user info
 
 # fullName = encrypt(fullName) Not important
-
 firstName = encrypt(firstName)
 lastName = encrypt(lastName)
-userName = encrypt(userName)
-userEmail = encrypt(userEmail)
 password = encrypt(password)
-
 # Hashing user info
 try:
     # Call the hashing function and store the hashed password
     password = HashingInfo(password)
-    Email = HashingInfo(userEmail)
-    username = HashingInfo(userName)
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")

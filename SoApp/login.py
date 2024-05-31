@@ -17,7 +17,7 @@ username  = ""
 password = ""
 email = ""
 def makelistofsignup_info():
-    cursor.execute("SELECT username, password FROM signup_info")
+    cursor.execute("SELECT username, password, email FROM signup_info")
     alli = cursor.fetchall()
     linfo = []
     fa = ""
@@ -30,6 +30,14 @@ def makelistofsignup_info():
     return linfo
 
 linfo = makelistofsignup_info()
+User_Counter = 0
+def count_login():
+    global User_Counter
+    for i in linfo :
+        User_Counter += 1
+    return User_Counter
+
+User_Counter = count_login()
 def login():
     global username,password,email
 
@@ -45,12 +53,15 @@ def login():
     except Exception as e:
         print(f"An error occurred: {e}")
 
+    checkererror = 0
+
     for i in linfo:
-        print(i)
-        print(username, password)
         if username == i[0] and password == i[1]:
             print("Login Successful")
+            break
         else:
-            print("Username Or Password Incorrect")
+            checkererror += 1
+            if checkererror == User_Counter :
+                print("Username Or Password 's Incrorect")
 
 login()

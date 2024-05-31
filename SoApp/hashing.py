@@ -1,4 +1,5 @@
 import hashlib
+from ncrpt import *
 
 
 def HashingInfo(input_string):
@@ -13,3 +14,10 @@ def HashingInfo(input_string):
 
     # Get the hexadecimal representation of the hash
     return md5_hash.hexdigest()
+
+def forget(set):
+    set = str(set)
+    set = set.lower()
+    set = encrypt(set)
+    set = HashingInfo(set)
+    return set
