@@ -1,7 +1,22 @@
+# import all requird lib & function
+
+# import ncrpt.py some function to make encrption
 from ncrpt import *
+# import hashing.py one function to make hashing
 from hashing import *
+# import sqlite3 lib to make connection between sqlite Database and python app
+import sqlite3
 
+# connect to Database File
+db = sqlite3.connect("user_info.db")
 
+# to set DataBase cursor in var
+cursor = db.cursor()
+
+# To make 2 table if not exists
+cursor.execute("CREATE TABLE IF NOT EXISTS signup_info (username TEXT NOT NULL, password TEXT, email TEXT NOT NULL, firstname TEXT, lastname TEXT, PRIMARY KEY(username, email));")
+cursor.execute("CREATE TABLE IF NOT EXISTS user_info (username TEXT NOT NULL, rounds INTEGER, lose rounds	INTEGER, win rounds	INTEGER, points	INTEGER, lose points INTEGER, win points INTEGER, PRIMARY KEY(username), FOREIGN KEY (username) REFERENCES signup_info (username));")
+# to defline some var
 fullName = ""
 firstName = ""
 userName = ""
@@ -13,7 +28,7 @@ rePassword = ""
 print("------------Sign up------------")
 print("  Please enter your information  ")
 
-
+# Function to get user info to sign up with this info
 def signup():
     global fullName, firstName, lastName, userEmail, password, rePassword
 
@@ -63,24 +78,37 @@ def signup():
 
     password = ValidPass()
 
+# Run Main Function sign up
 
 signup()
 
+# encrption all user info
 
-fullName = encrypt(fullName)
+# fullName = encrypt(fullName) Not important
+
 firstName = encrypt(firstName)
 lastName = encrypt(lastName)
 userName = encrypt(userName)
 userEmail = encrypt(userEmail)
 password = encrypt(password)
 
+# Hashing user info
 try:
     # Call the hashing function and store the hashed password
     password = HashingInfo(password)
     Email = HashingInfo(userEmail)
-    UserName = HashingInfo(userName)
+    username = HashingInfo(userName)
     print(f"Successfully signed up")
 except Exception as e:
     print(f"An error occurred: {e}")
 
+# to add this info to database
+cursor.execute("SELECT username FROM signup_info")
+cursor.execute("")
+cursor.execute(f"INSERT INTO signup_info(username, password, email, firstname, lastname) VALUES(?, ?, ?, ?, ?)", (username, password, Email, firstName, lastName))
 
+# to save all changs in database
+
+db.commit()
+
+db.close()
