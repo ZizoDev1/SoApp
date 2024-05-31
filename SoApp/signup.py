@@ -60,7 +60,7 @@ def signup():
 
         else:
             print("Please enter your full name with a space between first and last names.")
-
+# the first in erorr
     while True:
         userName = input("Enter your username \n --> ")
         username = forget(userName)
@@ -72,7 +72,7 @@ def signup():
                 print(i[0], username)
                 print("")
                 break
-
+# the end in erorr
     while True:
         userEmail = input("Enter your email address \n --> ")
         if "@" in userEmail:
