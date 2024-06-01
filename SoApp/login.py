@@ -1,67 +1,65 @@
-# import all requird lib & function
-
-# import ncrpt.py some function to make encrption
+# Import all required libraries and functions
 from ncrpt import *
-# import hashing.py one function to make hashing
 from hashing import *
-# import sqlite3 lib to make connection between sqlite Database and python app
 import sqlite3
 
-# connect to Database File
+# Connect to the database file
 db = sqlite3.connect("user_info.db")
-
-# to set DataBase cursor in var
 cursor = db.cursor()
 
-username  = ""
+userName = ""
 password = ""
 email = ""
-def makelistofsignup_info():
+
+# Fetch user information from the database
+
+
+def fetch_user_info():
     cursor.execute("SELECT username, password, email FROM signup_info")
-    alli = cursor.fetchall()
-    linfo = []
-    fa = ""
-    for i in alli:
-        r = str(i[0])
-        l = str(i[1])
-        fa = r + " " + l
-        li = fa.split(" ")
-        linfo.append(li)
-    return linfo
+    return cursor.fetchall()
 
-linfo = makelistofsignup_info()
-User_Counter = 0
-def count_login():
-    global User_Counter
-    for i in linfo :
-        User_Counter += 1
-    return User_Counter
 
-User_Counter = count_login()
+userInfo = fetch_user_info()
+
+# Count the number of users in the database
+
+
+def count_users():
+    return len(userInfo)
+
+
+User_Counter = count_users()
+
+# Function for user login
+
+
 def login():
-    global username,password,email
+    global userName, password, email
 
-    user_name = input("Enter your username: ")
-    pass_word = input("Enter your password: ")
+    userName = input("Enter your username: ")
+    password = input("Enter your password: ")
 
-    Username = encrypt(user_name)
-    Password = encrypt(pass_word)
+    encrypted_userName = encrypt(userName)
+    encrypted_password = encrypt(password)
+
     try:
-        # Call the hashing function and store the hashed password
-        password = HashingInfo(Password)
-        username = HashingInfo(Username)
+        # Hash the encrypted username and password
+        hashed_userName = HashingInfo(encrypted_userName)
+        hashed_password = HashingInfo(encrypted_password)
     except Exception as e:
         print(f"An error occurred: {e}")
+        return
 
-    checkererror = 0
+    error_counter = 0
 
-    for i in linfo:
-        if username == i[0] and password == i[1]:
+    for user in userInfo:
+        if hashed_userName == user[0] and hashed_password == user[1]:
             print("Login Successful")
             break
         else:
-            checkererror += 1
-            if checkererror == User_Counter :
-                print("Username Or Password 's Incrorect")
+            error_counter += 1
+            if error_counter == User_Counter:
+                print("Username or Password is incorrect")
+
 
 login()
