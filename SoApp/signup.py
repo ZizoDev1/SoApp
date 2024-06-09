@@ -36,12 +36,6 @@ def signup():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS user_info (
         username TEXT NOT NULL, 
-        rounds INTEGER, 
-        lose_rounds INTEGER, 
-        win_rounds INTEGER, 
-        points INTEGER, 
-        lose_points INTEGER, 
-        win_points INTEGER, 
         PRIMARY KEY(username), 
         FOREIGN KEY (username) REFERENCES signup_info (username)
     );
