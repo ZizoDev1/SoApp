@@ -3,10 +3,25 @@ from ncrpt import *
 from hashing import *
 import sqlite3
 
+db = sqlite3.connect("user_info.db")
+cursor = db.cursor()
+
+
+def fetch_user_info(cursor):
+    cursor.execute("SELECT username, email FROM signup_info")
+    return cursor.fetchall()
+
+
+def fetch_signup_info(cursor):
+    cursor.execute("SELECT username, password, email, firstname, lastname FROM signup_info")
+    return cursor.fetchall()
+
+
+userInfo = fetch_user_info(cursor)
+userall = fetch_signup_info(cursor)
 
 def signup():
-    db = sqlite3.connect("user_info.db")
-    cursor = db.cursor()
+    global cursor
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS signup_info (
@@ -32,11 +47,6 @@ def signup():
     );
     """)
 
-    def fetch_user_info(cursor):
-        cursor.execute("SELECT username, email FROM signup_info")
-        return cursor.fetchall()
-
-    userInfo = fetch_user_info(cursor)
 
     def valid_pass():
         while True:
