@@ -2,6 +2,7 @@
 from ncrpt import *
 from hashing import *
 import sqlite3
+from SurrealDB import main
 
 db = sqlite3.connect("user_info.db")
 cursor = db.cursor()
@@ -99,6 +100,7 @@ def signup():
         print(f"An error occurred: {e}")
 
     try:
+        main(1, user_name, password, user_email, first_name, last_name)
         cursor.execute("INSERT INTO signup_info(username, password, email, firstname, lastname) VALUES(?, ?, ?, ?, ?)",
                        (user_name, password, user_email, first_name, last_name))
         db.commit()

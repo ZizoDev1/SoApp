@@ -2,6 +2,7 @@
 from ncrpt import *
 from hashing import *
 import sqlite3
+from SurrealDB import main
 
 # Connect to the database file
 db = sqlite3.connect("user_info.db")
@@ -43,24 +44,22 @@ def login():
     encrypted_password = encrypt(password)
 
     try:
-        # Hash the encrypted username and password
-        hashed_userName = HashingInfo(encrypted_userName)
+        # Hash the encrypted password
         hashed_password = HashingInfo(encrypted_password)
     except Exception as e:
         print(f"An error occurred: {e}")
         return
 
-    error_counter = 0
+    main(2, encrypted_userName, hashed_password, "dd@gg.gg", "ff", "ll")
+    # error_counter = 0
 
-    for user in userInfo:
-        if hashed_userName == user[0] and hashed_password == user[1]:
-            print("Login Successful")
-            break
-        else:
-            error_counter += 1
-            if error_counter == User_Counter:
-                print("Username or Password is incorrect")
-                print("Try again")
-                login()
-
-
+    # for user in userInfo:
+    #     if encrypted_userName == user[0] and hashed_password == user[1]:
+    #         print("Login Successful")
+    #         break
+    #     else:
+    #         error_counter += 1
+    #         if error_counter == User_Counter:
+    #             print("Username or Password is incorrect")
+    #             print("Try again")
+    #             login()
