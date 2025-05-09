@@ -3,10 +3,10 @@ from surrealdb import Surreal # type: ignore
 
 # الاتصال بقاعدة البيانات
 def connect_db():
-    with Surreal("http://localhost:8000") as db:
-        db.signin({"user": "torootdo", "pass": "torootdo"})
-        db.use("todo", "todo")
-        return db
+    db = Surreal("http://localhost:8000")
+    db.signin({"username": "torootdo", "password": "torootdo"})
+    db.use("todo", "todo")
+    return db
 
 # تسجيل مستخدم جديد
 def register_user(db, username, password, age, email, firstname, lastname):
@@ -18,18 +18,13 @@ def register_user(db, username, password, age, email, firstname, lastname):
         return None
     
     # إنشاء المستخدم
-    user = db.create("user", {
-        "username": username,
-        "password": password,
-        "email" : email,
-        "firstname" : firstname,
-        "lastname" : lastname
-    })
+    db.query(f"CREATE user SET username = '{username}', password = '{password}', email = '{email}', age = {age}, firstname = '{firstname}', lastname = '{lastname}'")
+
 
 # تسجيل الدخول
 def login_user(db, username, password):    
     result = db.query(f"SELECT * FROM user WHERE username = '{username}' AND password = '{password}'")
-    if not result[0]['result']:
+    if not result['result']:
         print("Invalid credentials!")
         return None
     return username
@@ -93,7 +88,7 @@ def login_user(db, username, password):
 #     print("Task deleted!")
 
 # القائمة الرئيسية
-def main(choice, username, password, email, firstname, lastname):
+def main(choice, username, password, age, email, firstname, lastname):
     db = connect_db()
     
     if choice == '1':

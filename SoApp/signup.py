@@ -9,13 +9,13 @@ from SurrealDB import main, connect_db
 
 def fetch_user_info():
     db = connect_db()
-    return db.query("SELECT username, password, email FROM signup_info")[0]['result']
+    return db.query("SELECT username, password, email FROM signup_info")
 
 
 
 def fetch_signup_info():
     db = connect_db()
-    return db.query("SELECT username, password, email, firstname, lastname FROM signup_info")[0]['result']
+    return db.query("SELECT username, password, email, firstname, lastname FROM signup_info")
 
 userInfo = fetch_user_info()
 userall = fetch_signup_info()
