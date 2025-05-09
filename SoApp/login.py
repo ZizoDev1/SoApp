@@ -1,12 +1,7 @@
 # Import all required libraries and functions
 from ncrpt import *
 from hashing import *
-import sqlite3
-from SurrealDB import main
-
-# Connect to the database file
-db = sqlite3.connect("user_info.db")
-cursor = db.cursor()
+from SurrealDB import main, connect_db
 
 userName = ""
 password = ""
@@ -16,8 +11,9 @@ email = ""
 
 
 def fetch_user_info():
-    cursor.execute("SELECT username, password, email FROM signup_info")
-    return cursor.fetchall()
+    db = connect_db()
+    return db.query("SELECT username, password FROM signup_info")
+
 
 
 userInfo = fetch_user_info()
@@ -35,7 +31,7 @@ User_Counter = count_users()
 
 
 def login():
-    global userName, password, email
+    global userName, password
 
     userName = input("Enter your username: ")
     password = input("Enter your password: ")
@@ -50,16 +46,4 @@ def login():
         print(f"An error occurred: {e}")
         return
 
-    main(2, encrypted_userName, hashed_password, "dd@gg.gg", "ff", "ll")
-    # error_counter = 0
-
-    # for user in userInfo:
-    #     if encrypted_userName == user[0] and hashed_password == user[1]:
-    #         print("Login Successful")
-    #         break
-    #     else:
-    #         error_counter += 1
-    #         if error_counter == User_Counter:
-    #             print("Username or Password is incorrect")
-    #             print("Try again")
-    #             login()
+    main(2, encrypted_userName, hashed_password, 5, "dd@gg.gg", "ff", "ll")

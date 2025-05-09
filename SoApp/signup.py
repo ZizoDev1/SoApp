@@ -1,48 +1,27 @@
 # Import all required libraries and functions
 from ncrpt import *
 from hashing import *
-import sqlite3
-from SurrealDB import main
-
-db = sqlite3.connect("user_info.db")
-cursor = db.cursor()
-
-
-def fetch_user_info(cursor):
-    cursor.execute("SELECT username, email FROM signup_info")
-    return cursor.fetchall()
+# import sqlite3
+from SurrealDB import main, connect_db
+# db = sqlite3.connect("user_info.db")
+# cursor = db.cursor()
 
 
-def fetch_signup_info(cursor):
-    cursor.execute("SELECT username, password, email, firstname, lastname FROM signup_info")
-    return cursor.fetchall()
+def fetch_user_info():
+    db = connect_db()
+    return db.query("SELECT username, password, email FROM signup_info")[0]['result']
 
 
-userInfo = fetch_user_info(cursor)
-userall = fetch_signup_info(cursor)
+
+def fetch_signup_info():
+    db = connect_db()
+    return db.query("SELECT username, password, email, firstname, lastname FROM signup_info")[0]['result']
+
+userInfo = fetch_user_info()
+userall = fetch_signup_info()
+
 
 def signup():
-    global cursor
-
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS signup_info (
-        username TEXT NOT NULL, 
-        password TEXT, 
-        email TEXT NOT NULL, 
-        firstname TEXT, 
-        lastname TEXT, 
-        PRIMARY KEY(username, email)
-    );
-    """)
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS user_info (
-        username TEXT NOT NULL, 
-        PRIMARY KEY(username), 
-        FOREIGN KEY (username) REFERENCES signup_info (username)
-    );
-    """)
-
-
     def valid_pass():
         while True:
             password = input(
@@ -65,6 +44,13 @@ def signup():
             break
         else:
             print("Please enter your full name with a space between first and last names.")
+    
+    while True:
+        age = input("Enter your age \n --> ")
+        if int(age) >= 5:
+            break
+        else:
+            print("Hallo baby can stop ware diapers in the first.")
 
     while True:
         user_name = input("Enter your username \n --> ")
@@ -77,7 +63,7 @@ def signup():
     while True:
         user_email = input("Enter your email address \n --> ")
         if "@" in user_email:
-            user_email = forget(user_email)
+            user_email = encrypt(user_email)
             if any(user_email == user[1] for user in userInfo):
                 print("This email address is already used.")
             else:
@@ -99,12 +85,4 @@ def signup():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-    try:
-        main(1, user_name, password, user_email, first_name, last_name)
-        cursor.execute("INSERT INTO signup_info(username, password, email, firstname, lastname) VALUES(?, ?, ?, ?, ?)",
-                       (user_name, password, user_email, first_name, last_name))
-        db.commit()
-    except sqlite3.IntegrityError:
-        print("An error occurred while signing up: This email is already registered.")
-
-    db.close()
+    main(1, user_name, password, age, user_email, first_name, last_name)
