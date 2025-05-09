@@ -2,3 +2,9 @@
 cls
 clear
 exit
+help
+SELECT * FROM user;
+SELECT * FROM user
+SELECT username, password, email FROM signup_info;
+SELECT username, password, email FROM user;
+SELECT username, email FROM user;
